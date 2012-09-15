@@ -1,6 +1,6 @@
 <?php
   session_start();
-  require_once '../mainincludes.php';
+  require_once '../mainIncludes.php';
 
   // include hybridauth lib
   $config = 'http://cmmedialc.com/lunchup/api/lib/hybridauth/config.php';
@@ -16,7 +16,7 @@
 
       if ($_SESSION["UserID"] != 0)
       {
-        $user = ORM::for_table('UserTbl')->where('UserID', $_SESSION["UserID"])->find_one();
+        $user = ORM::for_table()->where('UserID', $_SESSION["UserID"])->find_one();
 
         if ($user) {
           if ($user->FirstName == '')
