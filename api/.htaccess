@@ -1,0 +1,11 @@
+Action application/x-hg-php53 /cgi-sys/php53
+AddType application/x-httpd-php53 .php
+
+<IfModule mod_rewrite.c>
+    Options -MultiViews
+
+    RewriteEngine On
+    RewriteBase /lunchup/api/
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
