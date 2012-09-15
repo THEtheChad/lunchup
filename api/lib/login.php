@@ -13,7 +13,7 @@
         $adapter = $hybridauth->authenticate( $provider );
 
         $user_profile = $adapter->getUserProfile();
-
+/*
       if ($_SESSION["UserID"] != 0)
       {
         $user = ORM::for_table($UserTbl)->where('UserID', $_SESSION["UserID"])->find_one();
@@ -126,10 +126,12 @@
           $_SESSION["UserID"] = $user->id();
         }
       }
+
+      */
   } catch (Exception $ex) {
 
 echo $ex . "<br />" . $config;
   }
-  Header("Location:index.php");
+  //Header("Location:index.php");
 
 ?>
