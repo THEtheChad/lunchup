@@ -130,7 +130,7 @@
       }
   */    
   } catch (Exception $ex) {
-
+echo $ex;
 
   }
   //Header("Location:index.php");
