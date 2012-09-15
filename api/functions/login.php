@@ -1,6 +1,6 @@
 <?php
   session_start();
-  require_once '../mainincludes.php';
+  require_once '../mainIncludes.php';
 
   // include hybridauth lib
   $config = dirname(__FILE__) . '/api/lib/hybridauth/config.php';
