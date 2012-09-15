@@ -3,8 +3,8 @@
   require_once '../mainIncludes.php';
 
   // include hybridauth lib
-  $config = dirname(__FILE__) . '/api/lib/hybridauth/config.php';
-  require_once( "../api/lib/hybridauth/Hybrid/Auth.php" );
+  $config = dirname(__FILE__) . '/hybridauth/config.php';
+  require_once( "/hybridauth/Hybrid/Auth.php" );
   $provider = 'facebook';
 
   try {
