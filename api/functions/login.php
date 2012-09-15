@@ -3,7 +3,7 @@
   require_once '../mainIncludes.php';
 
   // include hybridauth lib
-  $config = '../lib/hybridauth/config.php';
+  $config = 'http://cmmedialc.com/lunchup/api/lib/hybridauth/config.php';
   require_once( "../lib/hybridauth/Hybrid/Auth.php" );
   $provider = 'facebook';
 
