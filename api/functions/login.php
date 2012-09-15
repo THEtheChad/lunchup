@@ -1,10 +1,10 @@
 <?php
   session_start();
-  require_once '../mainIncludes.php';
+  require_once '../mainincludes.php';
 
   // include hybridauth lib
-  $config = 'http://cmmedialc.com/lunchup/api/lib/hybridauth/config.php';
-  require_once( "../lib/hybridauth/Hybrid/Auth.php" );
+  $config = dirname(__FILE__) . '/api/lib/hybridauth/config.php';
+  require_once( "/api/lib/hybridauth/Hybrid/Auth.php" );
   $provider = 'facebook';
 
   try {
@@ -14,8 +14,6 @@
 
         $user_profile = $adapter->getUserProfile();
 
-        print_r($user_profile);
-/*
       if ($_SESSION["UserID"] != 0)
       {
         $user = ORM::for_table($UserTbl)->where('UserID', $_SESSION["UserID"])->find_one();
@@ -128,11 +126,10 @@
           $_SESSION["UserID"] = $user->id();
         }
       }
-  */    
   } catch (Exception $ex) {
-echo $ex;
 
+echo $ex . "<br />" . $config;
   }
-  //Header("Location:index.php");
+  Header("Location:index.php");
 
 ?>
