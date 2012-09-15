@@ -1,9 +1,6 @@
 <?php
 session_start();
-require_once __DIR__.'/lib/vendor/autoload.php';
-require_once __DIR__.'/lib/idiorm.php';
-require_once __DIR__.'/config.php';
-
+require_once __DIR__.'/mainIncludes.php';
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
