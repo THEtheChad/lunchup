@@ -14,9 +14,11 @@
 
         $user_profile = $adapter->getUserProfile();
 
+        print_r($user_profile);
+/*
       if ($_SESSION["UserID"] != 0)
       {
-        $user = ORM::for_table()->where('UserID', $_SESSION["UserID"])->find_one();
+        $user = ORM::for_table($UserTbl)->where('UserID', $_SESSION["UserID"])->find_one();
 
         if ($user) {
           if ($user->FirstName == '')
@@ -126,10 +128,11 @@
           $_SESSION["UserID"] = $user->id();
         }
       }
+  */    
   } catch (Exception $ex) {
 
 
   }
-  Header("Location:index.php");
+  //Header("Location:index.php");
 
 ?>
