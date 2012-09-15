@@ -4,7 +4,7 @@
 
   // include hybridauth lib
   $config = dirname(__FILE__) . '/hybridauth/config.php';
-  require_once( "/hybridauth/Hybrid/Auth.php" );
+  require_once( "hybridauth/Hybrid/Auth.php" );
   $provider = 'facebook';
 
   try {
