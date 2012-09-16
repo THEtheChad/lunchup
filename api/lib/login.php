@@ -16,7 +16,7 @@
 
 
       // Check to see if the user is already logged in
-      echo $_SESSION["UserID"];
+      //echo $_SESSION["UserID"];
       if ($_SESSION["UserID"] != 0)
       {
         $user = ORM::for_table($UserTbl)->where('UserID', $_SESSION["UserID"])->find_one();
@@ -47,12 +47,17 @@
             $user->set('Locale', $user_profile->region);
           }
           $user->save();
-          echo (ORM::for_table($UserFB)->where('UserID', $_SESSION["UserID"])->count());
+          //echo (ORM::for_table($UserFB)->where('UserID', $_SESSION["UserID"])->count());
           $userFB = ORM::for_table($UserFB)->where('UserID', $_SESSION["UserID"])->find_one();
-          if ($userFB->FacebookID == '') {
-            $userFB->set('FacebookID', $user_profile->identifier);
+          if ($userFB) {
+            if ($userFB->FacebookID == '') {
+              $userFB->set('FacebookID', $user_profile->identifier);
+            }
+          } else {
+            $userFB = ORM::for_table($UserFB)->creat();
+            $userFB->FacebookID = $user_profile->identifier;
           }
-          $userFB->set('AccessToken', $adapter->getAccessToken());
+          //$userFB->set('AccessToken', $adapter->getAccessToken());
           $userFB->save();
         }
 
@@ -90,8 +95,9 @@
           if ($userFB->FacebookID == '') {
             $userFB->set('FacebookID', $user_profile->identifier);
           }
-          $userFB->set('AccessToken', $adapter->getAccessToken());
+          //$userFB->set('AccessToken', $adapter->getAccessToken());
           $userFB->save();
+          echo 'test';
         } else {
 
           $user = ORM::for_table($UserTbl)->create();
@@ -109,7 +115,7 @@
           $userFB = ORM::for_table($UserFB)->create();
           $userFB->UserID = $userId;
           $userFB->FacebookID = $user_profile->identifier;
-          $userFB->AccessToken = $adapter->getAccessToken();
+          //$userFB->AccessToken = $adapter->getAccessToken();
           $userFB->save();
           $_SESSION["UserID"] = $userId;
         }
