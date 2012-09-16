@@ -6,13 +6,12 @@
   $config = dirname(__FILE__) . '/hybridauth/config.php';
   require_once( "hybridauth/Hybrid/Auth.php" );
   $provider = 'facebook';
-  
+
   try {
         $hybridauth = new Hybrid_Auth( $config );
 
         $adapter = $hybridauth->authenticate( $provider );
-
-//        $user_profile = $adapter->getUserProfile();
+        $user_profile = $adapter->getUserProfile();
 /*
       if ($_SESSION["UserID"] != 0)
       {
