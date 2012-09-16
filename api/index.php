@@ -16,6 +16,10 @@ $app->before(function (Request $request) {
 */
 });
 
+$app->get('/login', function() use ($app) {
+	Header("Location:http://cmmedialc.com/lunchup/api/login.php");
+});
+
 $app->get('/logout', function () use ($app) {
 	//Get the number of followers
 	session_destroy();
