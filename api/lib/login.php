@@ -13,23 +13,18 @@
         $adapter = $hybridauth->authenticate( $provider );
         $user_profile = $adapter->getUserProfile();
         print_r($user_profile);
-/*
+
+
+      // Check to see if the user is already logged in
       if ($_SESSION["UserID"] != 0)
       {
         $user = ORM::for_table($UserTbl)->where('UserID', $_SESSION["UserID"])->find_one();
+        $userFB = ORM::for_table($UserFB)->where('UserID', $_SESSION["UserID"])->find_one();
 
         if ($user) {
-          if ($user->FirstName == '')
+          if ($user->UserName == '')
           {
-            $user->set('FirstName', $user_profile->firstName);
-          }
-          if ($user->LastName == '')
-          {
-            $user->set('LastName', $user_profile->lastName);
-          }
-          if ($user->FBID == '')
-          {
-            $user->set('FBID', $user_profile->identifier);
+            $user->set('UserName', $user_profile->displayName);
           }
           if ($user->EmailAddress == '')
           {
@@ -39,40 +34,35 @@
           {
             if ($user_profile->gender == "male")
             {
-              $user->set('Gender', 'M');
+              $user->set('Gender', 'MALE');
             } else {
-              $user->set('Gender', 'F');
+              $user->set('Gender', 'FEMALE');
             }
             
           }
-          if ($user->ProfilePic == '') {
-            $url = 'http://graph.facebook.com/' . $user_profile->displayName . '/picture?type=normal';
-            $session_id= $_SESSION["UserID"]; // User session id
-            $ext = 'jpg';
-            $actual_image_name = time().$session_id.".".$ext;
-            file_put_contents('uploads/' . $actual_image_name, file_get_contents($url));
-            $user->set('ProfilePic', $actual_image_name);
-
+          if ($user->Image_URL == '') {
+            $user->set('Image_URL', $user_profile->photoURL);
           }
-          $user->set('FBAccessToken', $adapter->getAccessToken());
+          if ($user->Local == '') {
+            $user->set('Locale', $user_profile->region);
+          }
           $user->save();
+
+          if ($userFB->FacebookID == '') {
+            $userFB->set('FacebookID', $user_profile->identifier);
+          }
+          $userFB->set('AccessToken', $adapter->getAccessToken());
+          $userFB->save();
         }
 
         
       } else {
-        $user = ORM::for_table('UserTbl')->where('FBID', $user_profile->identifier)->find_one();
+        $userFB = ORM::for_table($UserFB)->where('FacebookID', $user_profile->identifier)->find_one();
+        $user = ORM::for_table($UserTbl)->where('UserID', $userFB->UserID)->find_one();
        if ($user) {
-          if ($user->FirstName == '')
+          if ($user->UserName == '')
           {
-            $user->set('FirstName', $user_profile->firstName);
-          }
-          if ($user->LastName == '')
-          {
-            $user->set('LastName', $user_profile->lastName);
-          }
-          if ($user->FBID == '')
-          {
-            $user->set('FBID', $user_profile->identifier);
+            $user->set('UserName', $user_profile->displayName);
           }
           if ($user->EmailAddress == '')
           {
@@ -82,52 +72,46 @@
           {
             if ($user_profile->gender == "male")
             {
-              $user->set('Gender', 'M');
+              $user->set('Gender', 'MALE');
             } else {
-              $user->set('Gender', 'F');
+              $user->set('Gender', 'FEMALE');
             }
             
           }
-          $_SESSION["UserID"] = $user->UserID;
-          if ($user->ProfilePic == '') {
-            $url = 'http://graph.facebook.com/' . $user_profile->displayName . '/picture?type=normal';
-            $session_id= $_SESSION["UserID"]; // User session id
-            $ext = 'jpg';
-            $actual_image_name = time().$session_id.".".$ext;
-            file_put_contents('uploads/' . $actual_image_name, file_get_contents($url));
-            $user->set('ProfilePic', $actual_image_name);
-
+          if ($user->Image_URL == '') {
+            $user->set('Image_URL', $user_profile->photoURL);
           }
-          $user->set('FBAccessToken', $adapter->getAccessToken());
+          if ($user->Local == '') {
+            $user->set('Locale', $user_profile->region);
+          }
           $user->save();
+
+          if ($userFB->FacebookID == '') {
+            $userFB->set('FacebookID', $user_profile->identifier);
+          }
+          $userFB->set('AccessToken', $adapter->getAccessToken());
+          $userFB->save();
         } else {
 
-          $user = ORM::for_table('UserTbl')->create();
-          $user->FirstName = $user_profile->firstName;
-          $user->LastName = $user_profile->lastName;
-          $user->FBID = $user_profile->identifier;
+          $user = ORM::for_table($UserTbl)->create();
+          $user->UserName = $user_profile->displayName;
           $user->EmailAddress = $user_profile->email;
           if ($user_profile->gender == "male")
           {
-            $user->Gender = 'M';
+            $user->Gender = 'MALE';
           } else {
-            $user->Gender = 'F';
+            $user->Gender = 'FEMALE';
           }
-          $url = 'http://graph.facebook.com/' . $user_profile->displayName . '/picture?type=normal';
-          $session_id= rand(); // User session id
-          $ext = 'jpg';
-          $actual_image_name = time().$session_id.".".$ext;
-          file_put_contents('uploads/' . $actual_image_name, file_get_contents($url));
-          $user->ProfilePic = $actual_image_name;
-          $user->IPAddress = $_SERVER["REMOTE_ADDR"];
-          $user->Timestamp = time();
-          $user->FBAccessToken = $adapter->getAccessToken();
+          $user->Image_URL = $user_profile->photoURL;
           $user->save();
-          $_SESSION["UserID"] = $user->id();
+          $userId = $user->id();
+          $userFB = ORM::for_table($UserFB)->create();
+          $userFB->FacebookID = $user_profile->identifier;
+          $userFB->AccessToken = $adapter->getAccessToken();
+          $_SESSION["UserID"] = $userId;
         }
       }
-
-      */
+      echo $userId;
   } catch (Exception $ex) {
 
 echo $ex . "<br />" . $config;
