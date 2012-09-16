@@ -8,6 +8,8 @@
   $provider = 'facebook';
   echo $config
   exit;
+
+/*  
   try {
         $hybridauth = new Hybrid_Auth( $config );
 
@@ -129,10 +131,11 @@
       }
 
       */
+      /*
   } catch (Exception $ex) {
 
 echo $ex . "<br />" . $config;
   }
   //Header("Location:index.php");
-
+*/
 ?>
