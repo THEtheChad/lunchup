@@ -19,7 +19,6 @@
       if ($_SESSION["UserID"] != 0)
       {
         $user = ORM::for_table($UserTbl)->where('UserID', $_SESSION["UserID"])->find_one();
-        $userFB = ORM::for_table($UserFB)->where('UserID', $_SESSION["UserID"])->find_one();
 
         if ($user) {
           if ($user->UserName == '')
@@ -47,7 +46,8 @@
             $user->set('Locale', $user_profile->region);
           }
           $user->save();
-
+          
+          $userFB = ORM::for_table($UserFB)->where('UserID', $_SESSION["UserID"])->find_one();
           if ($userFB->FacebookID == '') {
             $userFB->set('FacebookID', $user_profile->identifier);
           }
@@ -108,6 +108,7 @@
           $userFB = ORM::for_table($UserFB)->create();
           $userFB->FacebookID = $user_profile->identifier;
           $userFB->AccessToken = $adapter->getAccessToken();
+          $UserFB->save();
           $_SESSION["UserID"] = $userId;
         }
       }
