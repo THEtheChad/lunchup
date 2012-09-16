@@ -54,7 +54,7 @@
               $userFB->set('FacebookID', $user_profile->identifier);
             }
           } else {
-            $userFB = ORM::for_table($UserFB)->creat();
+            $userFB = ORM::for_table($UserFBTbl)->creat();
             $userFB->FacebookID = $user_profile->identifier;
           }
           //$userFB->set('AccessToken', $adapter->getAccessToken());
@@ -63,7 +63,7 @@
 
         
       } else {
-        $userFB = ORM::for_table($UserFB)->where('FacebookID', $user_profile->identifier)->find_one();
+        $userFB = ORM::for_table($UserFBTbl)->where('FacebookID', $user_profile->identifier)->find_one();
         $user = ORM::for_table($UserTbl)->where('UserID', $userFB->UserID)->find_one();
        if ($user) {
           if ($user->UserName == '')
@@ -112,7 +112,7 @@
           $user->Image_URL = $user_profile->photoURL;
           $user->save();
           $userId = $user->id();
-          $userFB = ORM::for_table($UserFB)->create();
+          $userFB = ORM::for_table($UserFBTbl)->create();
           $userFB->UserID = $userId;
           $userFB->FacebookID = $user_profile->identifier;
           //$userFB->AccessToken = $adapter->getAccessToken();

@@ -38,6 +38,44 @@ $app->get('/hello/{name}', function ($name) use ($app) {
 	$result = fixCallback($responseArr);	
 	return $result;
 });
+
+$app->post('/postEvent', function(Request $request) use ($app) {
+	//Create an event first
+	//Create a status
+	//Attach event to user
+	$userId = $_SESSION["UserID"];
+
+	$event = ORM::for_table($EventTbl)->create();
+	$event->VenueID = $request->get('venue');
+	$event->Created_Time = time();
+	$event->EventDateTime = $request->get('eventDateTime');
+	$event->save();
+	$eventId = $event->id();
+	
+	$eventUsers = ORM::for_table($EventUsersTbl)->create();
+	$eventUsers->EventID = $eventId;
+	$eventUsers->USERID = $userId;
+	$eventUsers->save();
+
+	$status = ORM::for_table($StatusTbl)->create();
+	$status->Status = $request->get('status');
+	$status->EventID = $eventId;
+	$status->Created_DateTime = time();
+	$status->save();
+
+	if ($eventId && $eventUsers->id() && $status->id()) {
+		$result = 'success';
+	} else {
+		$result = 'failed';
+	}
+	$responseArr = array('results' => $result);
+	$result = fixCallback($responseArr);	
+	return $result;
+
+});
+
+
+
 $app->run();
 
 

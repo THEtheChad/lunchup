@@ -11,9 +11,10 @@ ORM::configure('id_column_overrides', array(
     'AppStatus' => 'StatusID',
     'AppVenues' => 'VenueID',
     'AppUsers_Facebook' => 'UserID'
+    'AppEvent_Users' => 'EventID',
+
 ));
 /*
-    'AppEvent_Users' => '',
     'AppUsers_Friends' => '',
     'AppUsers_Twitter' => '',
 */
@@ -21,7 +22,7 @@ $UserTbl = 'AppUsers';
 $StatusTbl = 'AppStatus';
 $EventsTbl = 'AppEvents';
 $VenuesTbl = 'AppVenues';
-$UserFB = 'AppUsers_Facebook';
-$EventUsers = 'AppEvent_Users';
+$UserFBTbl = 'AppUsers_Facebook';
+$EventUsersTbl = 'AppEvent_Users';
 
 ?>
