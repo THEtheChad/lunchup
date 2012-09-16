@@ -108,7 +108,7 @@
           $userFB = ORM::for_table($UserFB)->create();
           $userFB->FacebookID = $user_profile->identifier;
           $userFB->AccessToken = $adapter->getAccessToken();
-          $UserFB->save();
+          $userFB->save();
           $_SESSION["UserID"] = $userId;
         }
       }
