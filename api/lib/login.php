@@ -12,7 +12,7 @@
 
         $adapter = $hybridauth->authenticate( $provider );
 
-        $user_profile = $adapter->getUserProfile();
+//        $user_profile = $adapter->getUserProfile();
 /*
       if ($_SESSION["UserID"] != 0)
       {
