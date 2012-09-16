@@ -16,8 +16,8 @@ $app->before(function (Request $request) {
 */
 });
 
-$app->get('/login', function() use ($app) {
-	Header("Location:http://cmmedialc.com/lunchup/api/login.php");
+$app->get('/login', function () use ($app) {
+	Header("Location:http://cmmedialc.com/lunchup/api/lib/login.php");
 });
 
 $app->get('/logout', function () use ($app) {
