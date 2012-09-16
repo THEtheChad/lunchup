@@ -97,7 +97,7 @@
           }
           //$userFB->set('AccessToken', $adapter->getAccessToken());
           $userFB->save();
-          echo 'test';
+          $_SESSION["UserID"] = $user->UserID;
         } else {
 
           $user = ORM::for_table($UserTbl)->create();
@@ -120,11 +120,10 @@
           $_SESSION["UserID"] = $userId;
         }
       }
-      echo $userId;
   } catch (Exception $ex) {
 
-echo $ex . "<br />" . $config;
+    //echo $ex . "<br />" . $config;
   }
-  //Header("Location:index.php");
+  Header("Location:http://cmmedialc.com/lunchup/index.html");
 
 ?>
