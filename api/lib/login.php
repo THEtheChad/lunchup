@@ -16,6 +16,7 @@
 
 
       // Check to see if the user is already logged in
+      echo $_SESSION["UserID"];
       if ($_SESSION["UserID"] != 0)
       {
         $user = ORM::for_table($UserTbl)->where('UserID', $_SESSION["UserID"])->find_one();
@@ -46,7 +47,7 @@
             $user->set('Locale', $user_profile->region);
           }
           $user->save();
-          
+          echo (ORM::for_table($UserFB)->where('UserID', $_SESSION["UserID"])->count());
           $userFB = ORM::for_table($UserFB)->where('UserID', $_SESSION["UserID"])->find_one();
           if ($userFB->FacebookID == '') {
             $userFB->set('FacebookID', $user_profile->identifier);

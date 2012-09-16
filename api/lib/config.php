@@ -9,11 +9,11 @@ ORM::configure('id_column_overrides', array(
     'AppUsers' => 'UserID',
     'AppEvents' => 'EventID',
     'AppStatus' => 'StatusID',
-    'AppVenues' => 'VenueID'
+    'AppVenues' => 'VenueID',
+    'AppUsers_Facebook' => 'UserID'
 ));
 /*
     'AppEvent_Users' => '',
-    'AppUsers_Facebook' => '',
     'AppUsers_Friends' => '',
     'AppUsers_Twitter' => '',
 */
