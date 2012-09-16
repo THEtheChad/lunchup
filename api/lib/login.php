@@ -12,7 +12,7 @@
 
         $adapter = $hybridauth->authenticate( $provider );
         $user_profile = $adapter->getUserProfile();
-        print_r($user_profile);
+        //print_r($user_profile);
 
 
       // Check to see if the user is already logged in
